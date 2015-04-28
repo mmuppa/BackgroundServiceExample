@@ -1,6 +1,5 @@
 package edu.uw.tacoma.mmuppa.backgroundserviceexample;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -24,8 +23,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // Start the service
-                Intent i = new Intent(v.getContext(), RSSService.class);
-                startService(i);
+                //Intent i = new Intent(v.getContext(), RSSService.class);
+                //startService(i);
+
+                RSSService.setServiceAlarm(v.getContext(), true);
             }
         });
 

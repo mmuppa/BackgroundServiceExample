@@ -1,6 +1,7 @@
 package edu.uw.tacoma.mmuppa.backgroundserviceexample;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -30,6 +31,7 @@ public class RSSService extends IntentService {
 
     private static final String CNN_URL = "http://rss.cnn.com/rss/edition.rss";
     private static final String TAG = "RSSService";
+    private static final int POLL_INTERVAL = 60000; //60 seconds
 
     private int mId = 1;
 
@@ -88,5 +90,19 @@ public class RSSService extends IntentService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
         mNotificationManager.notify(mId, mBuilder.build());
+    }
+
+    public static void setServiceAlarm(Context context, boolean isOn) {
+        Intent i = new Intent(context, RSSService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, i, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if (isOn) {
+            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis()
+                                , POLL_INTERVAL, pendingIntent);
+        } else {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+        }
     }
 }
