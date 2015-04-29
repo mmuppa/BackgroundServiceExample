@@ -39,6 +39,14 @@ public class RSSService extends IntentService {
         super("RSSService");
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+        Log.i(TAG, "service starting");
+
+        return START_STICKY;
+    }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onHandleIntent(Intent intent) {
