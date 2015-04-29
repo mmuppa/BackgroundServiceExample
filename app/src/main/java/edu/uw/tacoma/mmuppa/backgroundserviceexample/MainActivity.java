@@ -45,6 +45,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+                RSSService.setServiceAlarm(v.getContext(), false);
+
                 ComponentName receiver = new ComponentName(v.getContext(), RSSBroadcastReceiver.class);
                 PackageManager pm = v.getContext().getPackageManager();
 
