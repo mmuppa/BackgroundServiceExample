@@ -4,5 +4,6 @@
     <string name="title_activity_main">BackgroundServiceActivity</string>
 
     <string name="start_service">Start Service!</string>
+    <string name="stop_service">Stop Service!</string>
     <string name="action_settings">Settings</string>
 </resources>

@@ -1,5 +1,7 @@
 package edu.uw.tacoma.mmuppa.backgroundserviceexample;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 
     private Button mStartButton;
+    private Button mStopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,27 @@ public class MainActivity extends ActionBarActivity {
                 //startService(i);
 
                 RSSService.setServiceAlarm(v.getContext(), true);
+
+                ComponentName receiver = new ComponentName(v.getContext(), RSSBroadcastReceiver.class);
+                PackageManager pm = v.getContext().getPackageManager();
+
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP);
+            }
+        });
+
+        mStopButton = (Button) findViewById(R.id.stop_service_button);
+        mStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ComponentName receiver = new ComponentName(v.getContext(), RSSBroadcastReceiver.class);
+                PackageManager pm = v.getContext().getPackageManager();
+
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
             }
         });
 

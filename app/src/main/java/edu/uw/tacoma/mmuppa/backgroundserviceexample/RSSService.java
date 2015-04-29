@@ -31,7 +31,7 @@ public class RSSService extends IntentService {
 
     private static final String CNN_URL = "http://rss.cnn.com/rss/edition.rss";
     private static final String TAG = "RSSService";
-    private static final int POLL_INTERVAL = 60000; //60 seconds
+    private static final int POLL_INTERVAL = 6000; //60 seconds
 
     private int mId = 1;
 
